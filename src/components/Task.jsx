@@ -1,8 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { TaskDispatchContext } from "../contexts/taskContext";
 
-export default function Task({ task, dispatch }) {
+export default function Task({task}) {
   const [isEdit, setIsEdit] = useState(true);
   const [value, setValue] = useState(task.text);
+  const dispatch = useContext(TaskDispatchContext);
+  
+  
   return (
     <li>
       <input

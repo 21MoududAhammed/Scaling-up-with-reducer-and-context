@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { generateNextId } from "../../ultils";
+import { TaskContext, TaskDispatchContext } from "../contexts/taskContext";
 
 
-export default function AddTask({dispatch, tasks}) {
+export default function AddTask() {
   const [value, setValue] = useState("");
+  const tasks = useContext(TaskContext);
+  const dispatch = useContext(TaskDispatchContext);
   return (
     <>
       <input
