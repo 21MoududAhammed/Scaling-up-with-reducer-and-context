@@ -1,12 +1,11 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { generateNextId } from "../../ultils";
-import { TaskContext, TaskDispatchContext } from "../contexts/taskContext";
-
+import { useTask, useTasksDispatch } from "../contexts/TaskContext";
 
 export default function AddTask() {
   const [value, setValue] = useState("");
-  const tasks = useContext(TaskContext);
-  const dispatch = useContext(TaskDispatchContext);
+  const tasks = useTask();
+  const dispatch = useTasksDispatch();
   return (
     <>
       <input
@@ -15,17 +14,21 @@ export default function AddTask() {
         type="text"
         placeholder="add a new task...."
       />
-      <button onClick={()=>{
-        setValue('');
-        dispatch({
-          type: 'added',
-          task: {
-            id: generateNextId(tasks),
-            text: value,
-            done: false
-          }
-        })
-      }}>Add Task</button>
+      <button
+        onClick={() => {
+          setValue("");
+          dispatch({
+            type: "added",
+            task: {
+              id: generateNextId(tasks),
+              text: value,
+              done: false,
+            },
+          });
+        }}
+      >
+        Add Task
+      </button>
     </>
   );
 }
